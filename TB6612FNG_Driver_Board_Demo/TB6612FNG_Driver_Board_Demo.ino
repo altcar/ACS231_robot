@@ -36,18 +36,18 @@ void loop() {
     }
   }
   if(flag1 == 1){
-    if(strstr(LFloop(),"1")){
+    if(LFloop().indexOf("1") >= 0){
       WLloop(3,3);
       delay(1000);
       flag1 = 2;
       //stopping condition
-      z_angle = 0
+      // z_angle = 0;
     }else{
        WLloop(1,1,1,-z_angle);
     }
  }
  if(flag1 == 2){
     //restain the arm
-    USloop()
+    USloop();
  }
 }
