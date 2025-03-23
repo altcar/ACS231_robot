@@ -1,13 +1,13 @@
 
-const int trigPin = 40;
-const int echoPin = 42;
+const int trigPin = 25;
+const int echoPin = 23;
 
 void USsetup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 }
 
-void USloop() {
+long USloop() {
   digitalWrite(trigPin, LOW);
   delayMicroseconds(5);
   digitalWrite(trigPin, HIGH);
@@ -20,8 +20,10 @@ void USloop() {
     Serial.println("No echo detected!");
   } else {
     long cm = (duration / 2) / 29.1;
-    // Serial.print("Distance: ");
-    // Serial.print(cm);
+    Serial.print("Distance: ");
+    Serial.println(cm);
     // Serial.println(" cm");
-  }
+    return cm;
 }
+  }
+  

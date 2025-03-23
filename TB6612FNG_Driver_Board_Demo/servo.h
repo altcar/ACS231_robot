@@ -18,10 +18,10 @@ Servo baseServo;
 Servo shoulderServo;
 Servo elbowServo;Servo wristServo;
 
-const int basePin = 11;
-const int shoulderPin = 10;
-const int elbowPin = 9;
-const int wristPin = 12;// not used
+const int basePin = 6;
+const int shoulderPin = 5;
+const int elbowPin = 4;
+const int wristPin = 3;// not used
 // Variables to store current positions
 int baseMicros = 1500;
 int shoulderMicros = 1500;
@@ -76,6 +76,14 @@ void SOsetup() {
 
 // ----------------------------------------------
 // Arduino loop function
+void SOloop2(int baseMicros, int shoulderMicros, int elbowMicros, int wristMicros =1000){
+  baseServo.writeMicroseconds(baseMicros);
+   elbowServo.writeMicroseconds(shoulderMicros);
+  wristServo.writeMicroseconds(elbowMicros);
+ shoulderServo.writeMicroseconds(wristMicros);
+        // Serial.print( shoulderMicros,  elbowMicros,);
+  Serial.println("running");
+}
 void SOloop() {
 
   
@@ -88,9 +96,9 @@ void SOloop() {
     currentPos += direction;
 
     // Check boundaries
-    if (currentPos <= 600 || currentPos >= 1100) {
-      direction *= -1;  // Reverse direction
-    }
+    // if (currentPos <= 600 || currentPos >= 1100) {
+    //   direction *= -1;  // Reverse direction
+    // }
 
     // Constrain position to valid range
     currentPos = constrain(currentPos, 600, 1100);

@@ -31,7 +31,7 @@ float IMloop(float z_angle) {
 
     // Integrate to find angle change
     z_angle += gZ * dt;
-Serial.println(z_angle);
+Serial.print(z_angle);
     // Normalize angle to keep it within -180 to 180 degrees
     if (z_angle > 180) z_angle -= 360;
     if (z_angle < -180) z_angle += 360;

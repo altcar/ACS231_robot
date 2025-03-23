@@ -1,7 +1,7 @@
 
-int sensorL = 29;
-int sensorC = 31;
-int sensorR = 33;
+int sensorL = 27;
+int sensorC = 29;
+int sensorR = 31;
 
 
 void LFsetup() {
@@ -17,5 +17,6 @@ String LFloop() {
 p+= digitalRead(sensorL);
 p+= digitalRead(sensorC);
 p+= digitalRead(sensorR);
+Serial.println(p);
 return p;
 }

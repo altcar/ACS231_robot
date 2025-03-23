@@ -1,10 +1,12 @@
-const int pinAI1 = 9;      // Pin allocation for AI1
-const int pinAI2 = 8;      // Pin allocation for AI2
-const int pinPWMA = 7;     // Pin allocation for the PWM pin
+const int pinPWMA = 13; 
+const int pinAI2 = 12;
+const int pinAI1 = 11;      // Pin allocation for AI1
+      // Pin allocation for AI2
+    // Pin allocation for the PWM pin
 const int pinStandBy = 10; // Pin allocation for the standby pin
-const int pinBI1 = 11;     // Pin allocation for AI1
-const int pinBI2 = 12;     // Pin allocation for AI2
-const int pinPWMB = 13;
+const int pinBI1 = 9;     // Pin allocation for AI1
+const int pinBI2 = 8;     // Pin allocation for AI2
+const int pinPWMB = 7;
 
 bool AI1, AI2, BI1, BI2, standBy;
 unsigned char pwmValueL = 0, pwmValueR = 0; // PWM value to be written to the output
@@ -26,6 +28,7 @@ extern void WLsetup()
 
 void WLloop(int Left, int Right, int guidance = 0, float theta = 0)
 {
+      Serial.print(theta);
     switch (Left)
     {
     case 2:
@@ -67,7 +70,7 @@ void WLloop(int Left, int Right, int guidance = 0, float theta = 0)
     digitalWrite(pinBI2, BI2);
 if(guidance == 1){
     // Define constants for robot and simulation
-    const float h = 0.08;   // 1/2 distance between wheels in meters
+    const float h = 0.138;   // 1/2 distance between wheels in meters
     const int vMax = 250;   // Maximum PWM signal value (255)
     const float lambda = 1; // Constant for scaling control signal
 
@@ -91,12 +94,12 @@ if(guidance == 1){
     {
         pwmValueR = vMax;
     }
-    // Serial.print(pwmValueL );
-    // Serial.print(pwmValueR);
+    Serial.print(pwmValueL ); Serial.print(" ");
+    Serial.print(pwmValueR);
     // Serial.println(u);
 }else{
-    pwmValueL = 100;
-    pwmValueR = 100;
+    pwmValueL = 105;
+    pwmValueR = 130;
 }
     analogWrite(pinPWMA, pwmValueR);
     analogWrite(pinPWMB, pwmValueL);
@@ -104,6 +107,6 @@ if(guidance == 1){
 }
 
 // Update the robot's angle based on the difference in wheel velocities
-//   theta = theta + ((v_r - v_l) / (2 * h)) * 0.08 * 0.01;  // Update theta
+  // theta = theta + ((pwmValueR - pwmValueL) / (2 * h)) * h * 0.01;  // Update theta
 
 // Optional: Print values for debuggin
